@@ -1,11 +1,10 @@
 class Matrix:
     def __init__(self, matrix: list[list[int]]):
         self._matrix = matrix
-        print(matrix)
 
     def isValidMatrix(self) -> bool:
 
-        if len(self._matrix) != len(self._matrix[0]):
+        if len(self._matrix) == 0 or len(self._matrix) != len(self._matrix[0]):
             raise MatrixException("Kvadrat matris daxil edin")
 
         count_of_elements_each_row = set(map(len, self._matrix))

@@ -1,8 +1,12 @@
 import tkinter
 import tkinter as tk
+from tkinter import INSERT
 from tkinter import messagebox
-from determinant import MatrixException
+
 from determinant import Matrix
+from determinant import MatrixException
+from generate_matrix import convert_matrix_to_string
+from generate_matrix import generate_matrix
 
 
 def convert_to_integer_list(text: str):
@@ -47,6 +51,11 @@ def get_text() -> str:
             error_text = None
 
 
+def set_text_to_input_text(text: str):
+    inputBox.delete("1.0", "end")
+    inputBox.insert(INSERT, text)
+
+
 root = tk.Tk()
 
 root.title("Determinant Kalkulayator")
@@ -57,12 +66,21 @@ label = tk.Label(root, text="Matrisi daxil edin!", font=('Arial', 20))
 label.pack(pady=10)
 label.config(background="#FFA07A")
 
-inputBox = tk.Text(root, width=88, height=13, font=('Arial', 20))
+inputBox = tk.Text(root, width=88, height=10, font=(' Arial', 20))
 inputBox.pack(pady=10)
 
-button = tk.Button(root, text="Hesabla", borderwidth=.6, background="#3498db", width=10, height=1, font=('Arial', 20),
-                   command=lambda: get_text(), relief="groove")
-button.pack(pady=20)
+calculate_button = tk.Button(root, text="Hesabla", borderwidth=.6, background="#3498db", width=10, height=1,
+                             font=('Arial', 20),
+                             command=lambda: get_text(), relief="groove")
+calculate_button.pack(pady=20)
+
+generate_button = tk.Button(
+    root, text="Rastgələ matris generasiya elə", borderwidth=.6, background="#3498db", width=30, height=1,
+    font=('Arial', 20),
+    command=lambda: set_text_to_input_text(convert_matrix_to_string(generate_matrix())), relief="groove"
+)
+
+generate_button.pack(padx=50)
 
 answer_label = tk.Label(root, text="Cavab burada göstəriləcək", font=('Arial', 30))
 answer_label.pack(pady=0)
